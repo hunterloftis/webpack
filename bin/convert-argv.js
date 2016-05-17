@@ -384,6 +384,7 @@ module.exports = function(optimist, argv, convertOptions) {
 		mapArgToBoolean("debug");
 
 		ifBooleanArg("progress", function() {
+			if(!process.stdout.isTTY) return; // Only show progress on interactive terminals
 			var ProgressPlugin = require("../lib/ProgressPlugin");
 			ensureArray(options, "plugins");
 			var chars = 0,
